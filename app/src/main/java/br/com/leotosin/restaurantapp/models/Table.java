@@ -2,19 +2,19 @@ package br.com.leotosin.restaurantapp.models;
 
 public class Table {
 
-    private int number;
+    private String number;
     private boolean isOpen;
 
-    public Table(int num, boolean open) {
+    public Table(String num, boolean open) {
         this.number = num;
         this.isOpen = open;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

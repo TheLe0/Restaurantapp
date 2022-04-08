@@ -11,11 +11,11 @@
         android:layout_height="wrap_content"
         tools:context=".views.MainActivity">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_available_tables"
+        <TextView
+            android:id="@+id/tableNumber"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-
+            android:layout_height="wrap_content"
+            android:text="@string/table_title" />
     </LinearLayout>
+
 </ScrollView>
