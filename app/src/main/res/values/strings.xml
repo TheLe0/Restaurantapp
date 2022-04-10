@@ -2,4 +2,6 @@
     <string name="app_name">Restaurantapp</string>
     <string name="choose">Escolher</string>
     <string name="table_title">Mesa:</string>
+    <string name="add_product">Adicionar produto</string>
+    <string name="invoice_order">Finalizar o Pedido</string>
 </resources>
