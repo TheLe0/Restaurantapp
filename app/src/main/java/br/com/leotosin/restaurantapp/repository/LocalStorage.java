@@ -1,8 +1,10 @@
 package br.com.leotosin.restaurantapp.repository;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 import br.com.leotosin.restaurantapp.models.Order;
+import br.com.leotosin.restaurantapp.models.OrderLine;
 import br.com.leotosin.restaurantapp.models.Product;
 import br.com.leotosin.restaurantapp.models.ProductType;
 import br.com.leotosin.restaurantapp.models.Table;
@@ -29,6 +31,15 @@ public class LocalStorage implements IRepository {
     private void populateData() {
         this.populateTableList();
         this.populateAvailableProducts();
+    }
+
+    public Double getOrderSubtotal() {
+        AtomicReference<Double> totals = new AtomicReference<>(0.00);
+        this.order.getProducts().forEach((line) -> {
+            totals.updateAndGet(v -> v + line.getQty() * (line.getProduct().getPrice()));
+        });
+
+        return totals.get();
     }
 
     private void populateAvailableProducts() {
@@ -73,6 +84,17 @@ public class LocalStorage implements IRepository {
     public void changeTableStatus(int position, boolean isAvailable) {
         this.tables.get(position).setOpen(isAvailable);
         this.order.setTable(this.tables.get(position));
+
+        this.mockOrderItems();
+    }
+
+    private void mockOrderItems() {
+        ArrayList<OrderLine> lines = new ArrayList<>();
+
+        lines.add(new OrderLine(2, new Product("Coca-Cola", "Coca-cola normal lata.", 2.99, "coca_normal_lata", ProductType.DRINK)));
+        lines.add(new OrderLine(1, new Product("Frango Xadrez", "Frango Kung Pao, também transcrito como Gong Bao ou Kung Po, ou frango xadrez no Brasil, é um prato chinês frito e apimentado feito com frango, amendoim, legumes, e pimenta vermelha.", 29.90, "frango_xadrez", ProductType.FOOD)));
+
+        this.order.setProducts(lines);
     }
 
     public ArrayList<Table> getAvailableTables() {

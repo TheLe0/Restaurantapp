@@ -59,12 +59,24 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:orientation="horizontal"
-            android:layout_gravity="center"
             android:paddingTop="10dp"
+            android:layout_marginStart="10dp"
             android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/order_subtotal"
+                android:layout_width="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="10dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text="@string/r_0_00"/>
 
             <Button
                 android:id="@+id/invoiceOrder"
+                android:layout_gravity="end"
+                android:layout_marginStart="25dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/invoice_order"/>

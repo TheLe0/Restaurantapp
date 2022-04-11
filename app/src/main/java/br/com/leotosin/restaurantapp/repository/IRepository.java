@@ -12,4 +12,5 @@ public interface IRepository {
     Table findTableByPosition(int position);
     void changeTableStatus(int position, boolean isAvailable);
     Order getOrder();
+    Double getOrderSubtotal();
 }
