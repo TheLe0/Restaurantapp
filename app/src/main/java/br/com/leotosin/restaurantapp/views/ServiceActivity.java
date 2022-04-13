@@ -45,12 +45,12 @@ public class ServiceActivity extends AppCompatActivity {
         enableInvoiceOrder();
 
         btnInvoiceOrder.setOnClickListener(v -> {
-            Intent intent = new Intent(getBaseContext(), ProductActivity.class);
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
         });
 
         btnAddProduct.setOnClickListener(v -> {
-            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            Intent intent = new Intent(getBaseContext(), ProductActivity.class);
             startActivity(intent);
         });
     }

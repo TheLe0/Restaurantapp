@@ -85,16 +85,6 @@ public class LocalStorage implements IRepository {
         this.tables.get(position).setOpen(isAvailable);
         this.order.setTable(this.tables.get(position));
 
-        this.mockOrderItems();
-    }
-
-    private void mockOrderItems() {
-        ArrayList<OrderLine> lines = new ArrayList<>();
-
-        lines.add(new OrderLine(2, new Product("Coca-Cola", "Coca-cola normal lata.", 2.99, "coca_normal_lata", ProductType.DRINK)));
-        lines.add(new OrderLine(1, new Product("Frango Xadrez", "Frango Kung Pao, também transcrito como Gong Bao ou Kung Po, ou frango xadrez no Brasil, é um prato chinês frito e apimentado feito com frango, amendoim, legumes, e pimenta vermelha.", 29.90, "frango_xadrez", ProductType.FOOD)));
-
-        this.order.setProducts(lines);
     }
 
     public ArrayList<Table> getAvailableTables() {
@@ -110,9 +100,17 @@ public class LocalStorage implements IRepository {
         return availableTables;
     }
 
-    public ArrayList<Product> getAvailableProducts() {
+    public ArrayList<Product> getAvailableProductsByType(ProductType type) {
 
-        return availableProducts;
+        ArrayList<Product> list = new ArrayList<>();
+
+        for (Product availableProduct : availableProducts) {
+            if (availableProduct.getProductType() == type) {
+                list.add(availableProduct);
+            }
+        }
+
+        return list;
     }
 
 }
