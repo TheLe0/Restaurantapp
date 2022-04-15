@@ -33,6 +33,12 @@ public class LocalStorage implements IRepository {
         this.populateAvailableProducts();
     }
 
+    public void addProductToOrder(Product product) {
+        OrderLine line = new OrderLine(1, product);
+
+        this.order.getProducts().add(line);
+    }
+
     public Double getOrderSubtotal() {
         AtomicReference<Double> totals = new AtomicReference<>(0.00);
         this.order.getProducts().forEach((line) -> {

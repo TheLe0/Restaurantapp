@@ -14,4 +14,5 @@ public interface IRepository {
     void changeTableStatus(int position, boolean isAvailable);
     Order getOrder();
     Double getOrderSubtotal();
+    void addProductToOrder(Product product);
 }

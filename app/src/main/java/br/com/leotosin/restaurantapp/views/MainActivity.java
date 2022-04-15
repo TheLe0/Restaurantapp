@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewAvailableTables.setAdapter(adapter);
 
         recyclerViewAvailableTables.addOnItemTouchListener(
-                new RecyclerViewAvailableTablesClickListener(this, recyclerViewAvailableTables ,new RecyclerViewAvailableTablesClickListener.OnItemClickListener() {
+                new RecyclerViewClickListener(this, recyclerViewAvailableTables ,new RecyclerViewClickListener.OnItemClickListener() {
 
                     @Override
                     public void onItemClick(View view, int position) {

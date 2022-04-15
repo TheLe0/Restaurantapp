@@ -1,11 +1,15 @@
 package br.com.leotosin.restaurantapp.viewModels;
 
+import java.util.ArrayList;
+
+import br.com.leotosin.restaurantapp.models.Product;
 import br.com.leotosin.restaurantapp.models.ProductType;
 
-public class ProductViewModel {
-    private ProductType productType;
+public class ProductViewModel extends BaseViewModel {
 
-    public void changeProductType(String productTypeName) {
+    public ArrayList<Product> listProductsByType(String productTypeName) {
+
+        ProductType productType;
 
         switch(productTypeName) {
             case "Bebida":
@@ -14,6 +18,14 @@ public class ProductViewModel {
             case "Comida":
                 productType = ProductType.FOOD;
                 break;
+            default:
+                return new ArrayList<Product>();
         }
+
+        return this.repository.getAvailableProductsByType(productType);
+    }
+
+    public void addProduct(Product product) {
+        this.repository.addProductToOrder(product);
     }
 }

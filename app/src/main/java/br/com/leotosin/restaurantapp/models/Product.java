@@ -36,6 +36,8 @@ public class Product {
         return price;
     }
 
+    public String getPriceBrl() { return "R$ "+this.getPrice().toString(); }
+
     public void setPrice(Double price) {
         this.price = price;
     }

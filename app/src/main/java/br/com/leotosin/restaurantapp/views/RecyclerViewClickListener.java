@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class RecyclerViewAvailableTablesClickListener implements RecyclerView.OnItemTouchListener {
+public class RecyclerViewClickListener implements RecyclerView.OnItemTouchListener {
     private final OnItemClickListener mListener;
 
     public interface OnItemClickListener {
@@ -20,7 +20,7 @@ public class RecyclerViewAvailableTablesClickListener implements RecyclerView.On
 
     GestureDetector mGestureDetector;
 
-    public RecyclerViewAvailableTablesClickListener(Context context, final RecyclerView recyclerView, OnItemClickListener listener) {
+    public RecyclerViewClickListener(Context context, final RecyclerView recyclerView, OnItemClickListener listener) {
         mListener = listener;
         mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
