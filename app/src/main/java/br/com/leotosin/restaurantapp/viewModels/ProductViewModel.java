@@ -25,7 +25,8 @@ public class ProductViewModel extends BaseViewModel {
         return this.repository.getAvailableProductsByType(productType);
     }
 
-    public void addProduct(Product product) {
-        this.repository.addProductToOrder(product);
+    public void addProduct(String productName) {
+
+        this.repository.addTransitoryProduct(this.repository.findProductByName(productName));
     }
 }

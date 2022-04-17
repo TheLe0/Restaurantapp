@@ -13,11 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import br.com.leotosin.restaurantapp.R;
+import br.com.leotosin.restaurantapp.models.Product;
 import br.com.leotosin.restaurantapp.viewModels.ProductViewModel;
 
 public class ProductActivity extends AppCompatActivity {
@@ -59,8 +60,9 @@ public class ProductActivity extends AppCompatActivity {
 
                     @Override
                     public void onItemClick(View view, int position) {
-                        viewModel.addProduct(adapter.getProductByPosition(position));
-                        Intent intent = new Intent(getBaseContext(), ServiceActivity.class);
+                        TextView productName = (TextView) view.findViewById(R.id.product_name);
+                        viewModel.addProduct(productName.getText().toString());
+                        Intent intent = new Intent(getBaseContext(), ProductDetailActivity.class);
                         startActivity(intent);
                     }
 

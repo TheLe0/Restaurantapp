@@ -13,6 +13,7 @@ public class LocalStorage implements IRepository {
 
     private ArrayList<Table> tables;
     private ArrayList<Product> availableProducts;
+    private Product transitoryProduct;
     private Order order;
 
     public Order getOrder() {
@@ -33,8 +34,14 @@ public class LocalStorage implements IRepository {
         this.populateAvailableProducts();
     }
 
-    public void addProductToOrder(Product product) {
-        OrderLine line = new OrderLine(1, product);
+    public void addTransitoryProduct(Product product) {
+        this.transitoryProduct = product;
+    }
+
+    public Product getTransitoryProduct() { return this.transitoryProduct; }
+
+    public void addProductToOrder(Product product, int qty) {
+        OrderLine line = new OrderLine(qty, product);
 
         this.order.getProducts().add(line);
     }
@@ -104,6 +111,17 @@ public class LocalStorage implements IRepository {
         });
 
         return availableTables;
+    }
+
+    public Product findProductByName(String productName) {
+
+        for (Product product : this.availableProducts) {
+            if (product.getName().equals(productName)) {
+                return product;
+            }
+        }
+
+        return null;
     }
 
     public ArrayList<Product> getAvailableProductsByType(ProductType type) {

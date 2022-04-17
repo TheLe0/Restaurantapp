@@ -20,6 +20,7 @@ public class RecyclerViewAvailableProductsAdapter extends RecyclerView.Adapter<R
     private final List<Product> listProducts;
 
     public RecyclerViewAvailableProductsAdapter(List<Product> list) {
+
         this.listProducts = list;
     }
 
@@ -33,7 +34,18 @@ public class RecyclerViewAvailableProductsAdapter extends RecyclerView.Adapter<R
     }
 
     public Product getProductByPosition(int position) {
+
         return this.listProducts.get(position);
+    }
+
+    public Product getProductByName(String name) {
+        for (Product product : this.listProducts) {
+            if (product.getName().equals(name)) {
+                return product;
+            }
+        }
+
+        return null;
     }
 
     @Override

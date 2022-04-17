@@ -14,5 +14,8 @@ public interface IRepository {
     void changeTableStatus(int position, boolean isAvailable);
     Order getOrder();
     Double getOrderSubtotal();
-    void addProductToOrder(Product product);
+    void addProductToOrder(Product product, int qty);
+    void addTransitoryProduct(Product product);
+    Product getTransitoryProduct();
+    Product findProductByName(String productName);
 }
