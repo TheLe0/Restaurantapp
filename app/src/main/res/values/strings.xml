@@ -16,4 +16,6 @@
     <string name="r_0_00">R$ 0.00</string>
     <string name="product_image">Product image</string>
     <string name="_1">1</string>
+    <string name="add">+</string>
+    <string name="remove">-</string>
 </resources>

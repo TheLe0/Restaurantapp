@@ -1,12 +1,18 @@
 package br.com.leotosin.restaurantapp.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import br.com.leotosin.restaurantapp.R;
 import br.com.leotosin.restaurantapp.viewModels.ServiceViewModel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -18,6 +24,7 @@ public class ServiceActivity extends AppCompatActivity {
     private Button btnAddProduct;
     private TextView orderSubtotal;
     private Button btnInvoiceOrder;
+    private RecyclerView recyclerViewOrderProducts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,7 @@ public class ServiceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_service);
 
         this.initFields();
+        this.renderRecyclerView();
 
         String amount = new DecimalFormat("0.00").format(viewModel.orderSubtotal());
 
@@ -53,6 +61,18 @@ public class ServiceActivity extends AppCompatActivity {
             Intent intent = new Intent(getBaseContext(), ProductActivity.class);
             startActivity(intent);
         });
+
+        recyclerViewOrderProducts = findViewById(R.id.recycler_items_list);
+    }
+
+    private void renderRecyclerView() {
+        RecyclerViewOrderProductsAdapter adapter = new RecyclerViewOrderProductsAdapter(viewModel.listAllOrderProducts());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerViewOrderProducts.setLayoutManager(layoutManager);
+        recyclerViewOrderProducts.setHasFixedSize(true);
+        recyclerViewOrderProducts.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
+        recyclerViewOrderProducts.setAdapter(adapter);
+
     }
 
     private void enableInvoiceOrder() {

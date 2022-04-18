@@ -3,6 +3,7 @@ package br.com.leotosin.restaurantapp.repository;
 import java.util.ArrayList;
 
 import br.com.leotosin.restaurantapp.models.Order;
+import br.com.leotosin.restaurantapp.models.OrderLine;
 import br.com.leotosin.restaurantapp.models.Product;
 import br.com.leotosin.restaurantapp.models.ProductType;
 import br.com.leotosin.restaurantapp.models.Table;
@@ -18,4 +19,5 @@ public interface IRepository {
     void addTransitoryProduct(Product product);
     Product getTransitoryProduct();
     Product findProductByName(String productName);
+    ArrayList<OrderLine> getAllOrderProducts();
 }

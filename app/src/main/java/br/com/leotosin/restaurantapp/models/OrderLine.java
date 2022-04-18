@@ -14,12 +14,23 @@ public class OrderLine {
         return qty;
     }
 
+    public String getQtyFormated() {
+        return "Quantidade: "+qty;
+    }
+
     public void setQty(int qty) {
         this.qty = qty;
     }
 
     public Product getProduct() {
         return product;
+    }
+
+    public String getLineTotalBrl() {
+
+        double amount = this.qty*this.product.getPrice();
+
+        return "Valor: R$ "+ amount;
     }
 
     public void setProduct(Product item) {
