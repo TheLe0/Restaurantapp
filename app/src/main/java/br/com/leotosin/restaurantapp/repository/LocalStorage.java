@@ -1,7 +1,6 @@
 package br.com.leotosin.restaurantapp.repository;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import br.com.leotosin.restaurantapp.models.Order;
@@ -41,10 +40,34 @@ public class LocalStorage implements IRepository {
 
     public Product getTransitoryProduct() { return this.transitoryProduct; }
 
-    public void addProductToOrder(Product product, int qty) {
-        OrderLine line = new OrderLine(qty, product);
+    private OrderLine findProductOnOrder(Product product) {
+        for (OrderLine line : this.order.getProducts()) {
+            if (line.getProduct().getName().equals(product.getName())) {
+                return line;
+            }
+        }
 
-        this.order.getProducts().add(line);
+        return null;
+    }
+
+    private void updateProductQtyOnOrder(Product product) {
+        for (OrderLine line : this.order.getProducts()) {
+            if (line.getProduct().getName().equals(product.getName())) {
+                line.setQty(line.getQty() + 1);
+            }
+        }
+    }
+
+    public void addProductToOrder(Product product, int qty) {
+
+        OrderLine line = this.findProductOnOrder(product);
+
+        if (line == null) {
+            line = new OrderLine(qty, product);
+            this.order.getProducts().add(line);
+        } else {
+            this.updateProductQtyOnOrder(product);
+        }
     }
 
     public Double getOrderSubtotal() {

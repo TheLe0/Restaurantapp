@@ -72,7 +72,21 @@ public class ServiceActivity extends AppCompatActivity {
         recyclerViewOrderProducts.setHasFixedSize(true);
         recyclerViewOrderProducts.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
         recyclerViewOrderProducts.setAdapter(adapter);
+        recyclerViewOrderProducts.addOnItemTouchListener(
+                new RecyclerViewClickListener(this, recyclerViewOrderProducts ,new RecyclerViewClickListener.OnItemClickListener() {
 
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(getBaseContext(), ServiceActivity.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+
+                    }
+                })
+        );
     }
 
     private void enableInvoiceOrder() {
