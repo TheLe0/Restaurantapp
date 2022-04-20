@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import br.com.leotosin.restaurantapp.R;
+import br.com.leotosin.restaurantapp.repository.ProductEditActivity;
 import br.com.leotosin.restaurantapp.viewModels.ServiceViewModel;
 
 import android.content.Intent;
@@ -77,7 +78,9 @@ public class ServiceActivity extends AppCompatActivity {
 
                     @Override
                     public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(getBaseContext(), ServiceActivity.class);
+                        TextView productName = (TextView) view.findViewById(R.id.product_name);
+                        Intent intent = new Intent(getBaseContext(), ProductEditActivity.class);
+                        intent.putExtra("product", productName.getText().toString());
                         startActivity(intent);
                     }
 

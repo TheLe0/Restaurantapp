@@ -30,7 +30,7 @@ public class OrderLine {
 
         double amount = this.qty*this.product.getPrice();
 
-        return "Valor: R$ "+ amount;
+        return String.format("Valor: R$ %.2f", amount);
     }
 
     public void setProduct(Product item) {
