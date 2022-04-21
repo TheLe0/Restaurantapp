@@ -23,6 +23,7 @@ public class ServiceActivity extends AppCompatActivity {
     private final ServiceViewModel viewModel;
     private TextView orderSubtotal;
     private Button btnInvoiceOrder;
+    private Button btnReturnToTables;
     private RecyclerView recyclerViewOrderProducts;
 
     @Override
@@ -50,10 +51,16 @@ public class ServiceActivity extends AppCompatActivity {
         orderSubtotal = (TextView) findViewById(R.id.order_subtotal);
         Button btnAddProduct = (Button) findViewById(R.id.addProduct);
         btnInvoiceOrder = (Button) findViewById(R.id.invoiceOrder);
+        btnReturnToTables = (Button) findViewById(R.id.returnToTables);
         enableInvoiceOrder();
 
         btnInvoiceOrder.setOnClickListener(v -> {
             viewModel.invoiceOrder();
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            startActivity(intent);
+        });
+
+        btnReturnToTables.setOnClickListener(v -> {
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
         });
