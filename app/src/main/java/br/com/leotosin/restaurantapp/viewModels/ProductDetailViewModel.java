@@ -5,6 +5,7 @@ import br.com.leotosin.restaurantapp.models.Product;
 public class ProductDetailViewModel extends BaseViewModel {
 
     private final Product product;
+    private String orderId;
 
     public ProductDetailViewModel() {
         super();
@@ -18,6 +19,14 @@ public class ProductDetailViewModel extends BaseViewModel {
     public void addProductToOrder(String qty) {
         int productQty = Integer.parseInt(qty);
 
-        this.repository.addProductToOrder(product, productQty);
+        this.repository.addProductToOrder(orderId, product, productQty);
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

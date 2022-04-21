@@ -29,6 +29,7 @@ public class ProductEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_edit);
 
         this.getProduct();
+        this.getOrderId();
         this.initProductFields();
     }
 
@@ -36,6 +37,13 @@ public class ProductEditActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             viewModel.setProductName(extras.getString("product"));
+        }
+    }
+
+    private void getOrderId() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            viewModel.setOrderId(extras.getString("order_id"));
         }
     }
 
@@ -62,6 +70,7 @@ public class ProductEditActivity extends AppCompatActivity {
         btnAddProduct.setOnClickListener(v -> {
             viewModel.update(Integer.parseInt(productQty.getText().toString()));
             Intent intent = new Intent(getBaseContext(), ServiceActivity.class);
+            intent.putExtra("order_id", viewModel.getOrderId());
             startActivity(intent);
         });
 
@@ -70,6 +79,7 @@ public class ProductEditActivity extends AppCompatActivity {
         btnDelProduct.setOnClickListener(v -> {
             viewModel.removeProduct();
             Intent intent = new Intent(getBaseContext(), ServiceActivity.class);
+            intent.putExtra("order_id", viewModel.getOrderId());
             startActivity(intent);
         });
 

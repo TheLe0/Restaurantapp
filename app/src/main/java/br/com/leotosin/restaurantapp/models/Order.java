@@ -1,29 +1,40 @@
 package br.com.leotosin.restaurantapp.models;
 
+import java.util.UUID;
 import java.util.ArrayList;
 
 public class Order {
 
-    private Table table;
-    private ArrayList<OrderLine> products;
+    private final String orderId;
+    private final Table table;
+    private final ArrayList<OrderLine> products;
+    private boolean isInvoiced;
 
-    public Order() {
+    public Order(Table table) {
+
+        this.table = table;
+        this.orderId = table.getNumber()+UUID.randomUUID().toString();
+        this.isInvoiced = false;
         this.products = new ArrayList<>();
+    }
+
+    public String getOrderId() {
+        return this.orderId;
     }
 
     public ArrayList<OrderLine> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<OrderLine> products) {
-        this.products = products;
-    }
-
     public Table getTable() {
         return table;
     }
 
-    public void setTable(Table table) {
-        this.table = table;
+    public boolean isInvoiced() {
+        return isInvoiced;
+    }
+
+    public void setInvoiced(boolean invoiced) {
+        isInvoiced = invoiced;
     }
 }

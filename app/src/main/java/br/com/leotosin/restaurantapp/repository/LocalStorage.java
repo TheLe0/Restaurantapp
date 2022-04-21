@@ -12,21 +12,13 @@ import br.com.leotosin.restaurantapp.models.Table;
 public class LocalStorage implements IRepository {
 
     private ArrayList<Table> tables;
+    private final ArrayList<Order> orders;
     private ArrayList<Product> availableProducts;
     private Product transitoryProduct;
-    private Order order;
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
 
     public LocalStorage() {
         this.populateData();
-        this.order = new Order();
+        this.orders = new ArrayList<>();
     }
 
     private void populateData() {
@@ -40,71 +32,120 @@ public class LocalStorage implements IRepository {
 
     public Product getTransitoryProduct() { return this.transitoryProduct; }
 
-    private OrderLine findProductOnOrder(Product product) {
-        for (OrderLine line : this.order.getProducts()) {
-            if (line.getProduct().getName().equals(product.getName())) {
-                return line;
+    private OrderLine findProductOnOrder(String orderId, Product product) {
+
+        for (Order order : this.orders) {
+            if (order.getOrderId().equals(orderId)) {
+                for (OrderLine line : order.getProducts()) {
+                    if (line.getProduct().getName().equals(product.getName())) {
+                        return line;
+                    }
+                }
             }
         }
 
         return null;
     }
 
-    private void updateProductQtyOnOrder(Product product) {
-        for (OrderLine line : this.order.getProducts()) {
-            if (line.getProduct().getName().equals(product.getName())) {
-                line.setQty(line.getQty() + 1);
+    private void updateProductQtyOnOrder(String orderId, Product product) {
+
+        for (Order order : this.orders) {
+            if (order.getOrderId().equals(orderId)) {
+                for (OrderLine line : order.getProducts()) {
+                    if (line.getProduct().getName().equals(product.getName())) {
+                        line.setQty(line.getQty() + 1);
+                    }
+                }
             }
         }
     }
 
-    public void invoiceOrder(Order order) {
-        this.order = new Order();
-        this.transitoryProduct = null;
+    public void invoiceOrder(String orderId) {
 
-        for (Table table : this.tables) {
-            if (table.getNumber().equals(order.getTable().getNumber())) {
-                table.setOpen(true);
+        for (Order order : this.orders) {
+            if (order.getOrderId().equals(orderId)) {
+                order.setInvoiced(true);
+                for (Table table : this.tables) {
+                    if (table.getNumber().equals(order.getTable().getNumber())) {
+                        table.setOpen(true);
+                    }
+                }
             }
         }
     }
 
-    public void deleteProduct(Product product) {
-        this.order.getProducts().removeIf(line -> line.getProduct().getName().equals(product.getName()));
-    }
+    public void deleteProduct(String orderId, Product product) {
 
-    public void updateProduct(Product product, int qty) {
-        for (OrderLine line : this.order.getProducts()) {
-            if (line.getProduct().getName().equals(product.getName())) {
-                line.setQty(qty);
+        for (Order order : this.orders) {
+            if (order.getOrderId().equals(orderId)) {
+                order.getProducts().removeIf(line -> line.getProduct().getName().equals(product.getName()));
             }
         }
     }
 
-    public void addProductToOrder(Product product, int qty) {
+    public void updateProduct(String orderId, Product product, int qty) {
 
-        OrderLine line = this.findProductOnOrder(product);
+        for (Order order : this.orders) {
+            if (order.getOrderId().equals(orderId)) {
+                for (OrderLine line : order.getProducts()) {
+                    if (line.getProduct().getName().equals(product.getName())) {
+                        line.setQty(qty);
+                    }
+                }
+            }
+        }
+    }
+
+    public void addProductToOrder(String orderId, Product product, int qty) {
+
+        OrderLine line = this.findProductOnOrder(orderId, product);
 
         if (line == null) {
             line = new OrderLine(qty, product);
-            this.order.getProducts().add(line);
+
+            for (Order order : this.orders) {
+                if (order.getOrderId().equals(orderId)) {
+                    order.getProducts().add(line);
+                }
+            }
         } else {
-            this.updateProductQtyOnOrder(product);
+            this.updateProductQtyOnOrder(orderId, product);
         }
     }
 
-    public Double getOrderSubtotal() {
+    public Double getOrderSubtotal(String orderId) {
         AtomicReference<Double> totals = new AtomicReference<>(0.00);
-        this.order.getProducts().forEach((line) -> {
-            totals.updateAndGet(v -> v + line.getQty() * (line.getProduct().getPrice()));
-        });
+
+        for (Order order : this.orders) {
+            if (order.getOrderId().equals(orderId)) {
+                order.getProducts().forEach((line) -> {
+                    totals.updateAndGet(v -> v + line.getQty() * (line.getProduct().getPrice()));
+                });
+            }
+        }
 
         return totals.get();
     }
 
-    public ArrayList<OrderLine> getAllOrderProducts() {
+    public ArrayList<OrderLine> getAllOrderProducts(String orderId) {
 
-        return this.order.getProducts();
+        for (Order order : this.orders) {
+            if (order.getOrderId().equals(orderId)) {
+                return order.getProducts();
+            }
+        }
+
+        return null;
+    }
+
+    public Order getOrderById(String orderId) {
+        for (Order order : this.orders) {
+            if (order.getOrderId().equals(orderId)) {
+                return order;
+            }
+        }
+
+        return null;
     }
 
     private void populateAvailableProducts() {
@@ -142,14 +183,18 @@ public class LocalStorage implements IRepository {
         }
     }
 
-    public Table findTableByPosition(int position) {
-        return this.tables.get(position);
-    }
+    public String initOrder(String tableNumber) {
 
-    public void changeTableStatus(int position, boolean isAvailable) {
-        this.tables.get(position).setOpen(isAvailable);
-        this.order.setTable(this.tables.get(position));
+        for (Table table : this.tables) {
+            if (table.getNumber().equals(tableNumber)) {
+                table.setOpen(false);
+                Order order = new Order(table);
+                this.orders.add(order);
+                return order.getOrderId();
+            }
+        }
 
+        return "";
     }
 
     public ArrayList<Table> getAvailableTables() {

@@ -21,7 +21,6 @@ public class ServiceActivity extends AppCompatActivity {
 
     private TextView tableNumber;
     private final ServiceViewModel viewModel;
-    private Button btnAddProduct;
     private TextView orderSubtotal;
     private Button btnInvoiceOrder;
     private RecyclerView recyclerViewOrderProducts;
@@ -31,12 +30,13 @@ public class ServiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service);
 
+        this.getOrderId();
         this.initFields();
         this.renderRecyclerView();
 
         String amount = new DecimalFormat("0.00").format(viewModel.orderSubtotal());
 
-        tableNumber.setText(tableNumber.getText()+" "+viewModel.findTableNumber());
+        tableNumber.setText(tableNumber.getText()+" "+viewModel.getTableNumber());
         orderSubtotal.setText("R$ "+amount);
 
     }
@@ -48,7 +48,7 @@ public class ServiceActivity extends AppCompatActivity {
     private void initFields() {
         tableNumber = (TextView) findViewById(R.id.tableNumber);
         orderSubtotal = (TextView) findViewById(R.id.order_subtotal);
-        btnAddProduct = (Button) findViewById(R.id.addProduct);
+        Button btnAddProduct = (Button) findViewById(R.id.addProduct);
         btnInvoiceOrder = (Button) findViewById(R.id.invoiceOrder);
         enableInvoiceOrder();
 
@@ -60,6 +60,7 @@ public class ServiceActivity extends AppCompatActivity {
 
         btnAddProduct.setOnClickListener(v -> {
             Intent intent = new Intent(getBaseContext(), ProductActivity.class);
+            intent.putExtra("order_id", viewModel.getOrderId());
             startActivity(intent);
         });
 
@@ -80,6 +81,7 @@ public class ServiceActivity extends AppCompatActivity {
                     public void onItemClick(View view, int position) {
                         TextView productName = (TextView) view.findViewById(R.id.product_name);
                         Intent intent = new Intent(getBaseContext(), ProductEditActivity.class);
+                        intent.putExtra("order_id", viewModel.getOrderId());
                         intent.putExtra("product", productName.getText().toString());
                         startActivity(intent);
                     }
@@ -90,6 +92,13 @@ public class ServiceActivity extends AppCompatActivity {
                     }
                 })
         );
+    }
+
+    private void getOrderId() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            viewModel.setOrderId(extras.getString("order_id"));
+        }
     }
 
     private void enableInvoiceOrder() {

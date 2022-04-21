@@ -7,6 +7,8 @@ import br.com.leotosin.restaurantapp.models.ProductType;
 
 public class ProductViewModel extends BaseViewModel {
 
+    private String orderId;
+
     public ArrayList<Product> listProductsByType(String productTypeName) {
 
         ProductType productType;
@@ -28,5 +30,13 @@ public class ProductViewModel extends BaseViewModel {
     public void addProduct(String productName) {
 
         this.repository.addTransitoryProduct(this.repository.findProductByName(productName));
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

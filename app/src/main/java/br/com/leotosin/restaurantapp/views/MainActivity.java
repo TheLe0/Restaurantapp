@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import br.com.leotosin.restaurantapp.R;
 import br.com.leotosin.restaurantapp.viewModels.TableViewModel;
@@ -39,8 +40,12 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onItemClick(View view, int position) {
-                        viewModel.chooseTable(position);
+                        TextView tableNumber = (TextView) view.findViewById(R.id.table_number);
+                        String table = tableNumber.getText().toString();
+
+                        String id = viewModel.chooseTable(table);
                         Intent intent = new Intent(getBaseContext(), ServiceActivity.class);
+                        intent.putExtra("order_id", id);
                         startActivity(intent);
                     }
 

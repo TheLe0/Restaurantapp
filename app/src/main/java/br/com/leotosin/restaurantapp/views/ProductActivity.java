@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,14 +17,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.com.leotosin.restaurantapp.R;
-import br.com.leotosin.restaurantapp.models.Product;
 import br.com.leotosin.restaurantapp.viewModels.ProductViewModel;
 
 public class ProductActivity extends AppCompatActivity {
 
     private Spinner productType;
     private final ProductViewModel viewModel;
-    private ImageView productImage;
     private RecyclerView recyclerViewAvailableProducts;
 
     @Override
@@ -33,6 +30,7 @@ public class ProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
 
+        this.getOrderId();
         this.initActivityFields();
         this.renderProductTypesSpinner();
         this.renderRecyclerView();
@@ -46,6 +44,7 @@ public class ProductActivity extends AppCompatActivity {
         productType = findViewById(R.id.product_type);
         recyclerViewAvailableProducts = this.findViewById(R.id.recycler_available_products);
     }
+
 
     private void renderRecyclerView() {
         RecyclerViewAvailableProductsAdapter adapter = new RecyclerViewAvailableProductsAdapter(viewModel.listProductsByType(productType.getSelectedItem().toString()));
@@ -63,6 +62,7 @@ public class ProductActivity extends AppCompatActivity {
                         TextView productName = (TextView) view.findViewById(R.id.product_name);
                         viewModel.addProduct(productName.getText().toString());
                         Intent intent = new Intent(getBaseContext(), ProductDetailActivity.class);
+                        intent.putExtra("order_id", viewModel.getOrderId());
                         startActivity(intent);
                     }
 
@@ -72,6 +72,13 @@ public class ProductActivity extends AppCompatActivity {
                     }
                 })
         );
+    }
+
+    private void getOrderId() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            viewModel.setOrderId(extras.getString("order_id"));
+        }
     }
 
     private void renderProductTypesSpinner() {

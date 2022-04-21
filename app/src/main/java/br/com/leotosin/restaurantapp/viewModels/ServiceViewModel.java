@@ -6,21 +6,31 @@ import br.com.leotosin.restaurantapp.models.OrderLine;
 
 public class ServiceViewModel extends BaseViewModel {
 
+    private String orderId;
+
     public ServiceViewModel() {
         super();
     }
 
-    public String findTableNumber() {
-        return this.repository.getOrder().getTable().getNumber();
-    }
-
-    public Double orderSubtotal() { return this.repository.getOrderSubtotal(); }
+    public Double orderSubtotal() { return this.repository.getOrderSubtotal(this.orderId); }
 
     public void invoiceOrder() {
-        this.repository.invoiceOrder(this.repository.getOrder());
+        this.repository.invoiceOrder(orderId);
+    }
+
+    public String getTableNumber() {
+        return this.repository.getOrderById(orderId).getTable().getNumber();
     }
 
     public ArrayList<OrderLine> listAllOrderProducts() {
-        return this.repository.getAllOrderProducts();
+        return this.repository.getAllOrderProducts(orderId);
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

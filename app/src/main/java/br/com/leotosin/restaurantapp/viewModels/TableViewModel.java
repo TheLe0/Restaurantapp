@@ -10,9 +10,8 @@ public class TableViewModel extends BaseViewModel  {
         super();
     }
 
-    public void chooseTable(int position) {
-        this.repository.changeTableStatus(position, false);
-
+    public String chooseTable(String tableNumber) {
+        return this.repository.initOrder(tableNumber);
     }
 
     public ArrayList<Table> getAvailableTables() {

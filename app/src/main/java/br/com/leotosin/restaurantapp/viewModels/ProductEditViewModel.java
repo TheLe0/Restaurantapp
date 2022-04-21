@@ -5,6 +5,7 @@ import br.com.leotosin.restaurantapp.models.Product;
 public class ProductEditViewModel extends BaseViewModel {
 
     private String productName;
+    private String orderId;
 
     private Product product;
 
@@ -18,11 +19,11 @@ public class ProductEditViewModel extends BaseViewModel {
     }
 
     public void update(int qty) {
-        this.repository.updateProduct(product, qty);
+        this.repository.updateProduct(orderId, product, qty);
     }
 
     public void removeProduct() {
-        this.repository.deleteProduct(product);
+        this.repository.deleteProduct(orderId, product);
     }
 
     public Product getProduct() {
@@ -31,5 +32,13 @@ public class ProductEditViewModel extends BaseViewModel {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

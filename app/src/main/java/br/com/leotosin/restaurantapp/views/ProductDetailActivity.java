@@ -27,7 +27,15 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
+        this.getOrderId();
         initProductFields();
+    }
+
+    private void getOrderId() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            viewModel.setOrderId(extras.getString("order_id"));
+        }
     }
 
     private void initProductFields() {
@@ -53,6 +61,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnAddProduct.setOnClickListener(v -> {
             viewModel.addProductToOrder(productQty.getText().toString());
             Intent intent = new Intent(getBaseContext(), ServiceActivity.class);
+            intent.putExtra("order_id", viewModel.getOrderId());
             startActivity(intent);
         });
 

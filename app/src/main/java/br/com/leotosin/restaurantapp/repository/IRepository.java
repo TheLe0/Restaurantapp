@@ -11,16 +11,15 @@ import br.com.leotosin.restaurantapp.models.Table;
 public interface IRepository {
     ArrayList<Table> getAvailableTables();
     ArrayList<Product> getAvailableProductsByType(ProductType type);
-    Table findTableByPosition(int position);
-    void changeTableStatus(int position, boolean isAvailable);
-    Order getOrder();
-    Double getOrderSubtotal();
-    void addProductToOrder(Product product, int qty);
+    String initOrder(String tableNumber);
+    Order getOrderById(String orderId);
+    Double getOrderSubtotal(String orderId);
+    void addProductToOrder(String orderId, Product product, int qty);
     void addTransitoryProduct(Product product);
     Product getTransitoryProduct();
     Product findProductByName(String productName);
-    ArrayList<OrderLine> getAllOrderProducts();
-    void updateProduct(Product product, int qty);
-    void deleteProduct(Product product);
-    void invoiceOrder(Order order);
+    ArrayList<OrderLine> getAllOrderProducts(String orderId);
+    void updateProduct(String orderId, Product product, int qty);
+    void deleteProduct(String orderId, Product product);
+    void invoiceOrder(String orderId);
 }
