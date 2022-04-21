@@ -21,5 +21,6 @@ public interface IRepository {
     Product findProductByName(String productName);
     ArrayList<OrderLine> getAllOrderProducts();
     void updateProduct(Product product, int qty);
-    public void deleteProduct(Product product);
+    void deleteProduct(Product product);
+    void invoiceOrder(Order order);
 }

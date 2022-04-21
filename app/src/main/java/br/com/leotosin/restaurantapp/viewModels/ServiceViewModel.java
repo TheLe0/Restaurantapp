@@ -3,7 +3,6 @@ package br.com.leotosin.restaurantapp.viewModels;
 import java.util.ArrayList;
 
 import br.com.leotosin.restaurantapp.models.OrderLine;
-import br.com.leotosin.restaurantapp.models.Product;
 
 public class ServiceViewModel extends BaseViewModel {
 
@@ -16,6 +15,10 @@ public class ServiceViewModel extends BaseViewModel {
     }
 
     public Double orderSubtotal() { return this.repository.getOrderSubtotal(); }
+
+    public void invoiceOrder() {
+        this.repository.invoiceOrder(this.repository.getOrder());
+    }
 
     public ArrayList<OrderLine> listAllOrderProducts() {
         return this.repository.getAllOrderProducts();

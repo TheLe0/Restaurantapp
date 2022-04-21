@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import br.com.leotosin.restaurantapp.R;
-import br.com.leotosin.restaurantapp.repository.ProductEditActivity;
 import br.com.leotosin.restaurantapp.viewModels.ServiceViewModel;
 
 import android.content.Intent;
@@ -54,6 +53,7 @@ public class ServiceActivity extends AppCompatActivity {
         enableInvoiceOrder();
 
         btnInvoiceOrder.setOnClickListener(v -> {
+            viewModel.invoiceOrder();
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
         });

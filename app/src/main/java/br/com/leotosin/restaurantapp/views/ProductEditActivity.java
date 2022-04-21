@@ -1,4 +1,4 @@
-package br.com.leotosin.restaurantapp.repository;
+package br.com.leotosin.restaurantapp.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 

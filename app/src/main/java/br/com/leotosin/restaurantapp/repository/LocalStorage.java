@@ -58,6 +58,17 @@ public class LocalStorage implements IRepository {
         }
     }
 
+    public void invoiceOrder(Order order) {
+        this.order = new Order();
+        this.transitoryProduct = null;
+
+        for (Table table : this.tables) {
+            if (table.getNumber().equals(order.getTable().getNumber())) {
+                table.setOpen(true);
+            }
+        }
+    }
+
     public void deleteProduct(Product product) {
         this.order.getProducts().removeIf(line -> line.getProduct().getName().equals(product.getName()));
     }

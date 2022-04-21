@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Restaurantapp">
         <activity
-            android:name=".repository.ProductEditActivity"
+            android:name=".views.ProductEditActivity"
             android:exported="false" />
         <activity
             android:name=".views.ProductDetailActivity"
