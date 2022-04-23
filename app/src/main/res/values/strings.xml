@@ -21,4 +21,10 @@
     <string name="update_product">Atualizar produto</string>
     <string name="delete_product">Remover produto</string>
     <string name="delete">Remover</string>
+    <string name="return_to_tables">Voltar</string>
+    <string name="subtotal">Subtotal R$</string>
+    <string name="total">Total R$</string>
+    <string name="invoice_tip">Pagar com gorjeta</string>
+    <string name="invoice_no_tip">Pagar sem gorjeta</string>
+    <string name="line_price">%1$d X %2$f = %3$f</string>
 </resources>

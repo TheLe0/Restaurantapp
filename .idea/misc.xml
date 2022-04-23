@@ -3,6 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jeanm/StudioProjects/Restaurantapp2.0/app/src/main/res/layout/activity_invoice_order.xml" value="0.35733695652173914" />
+        <entry key="..\:/Users/jeanm/StudioProjects/Restaurantapp2.0/app/src/main/res/layout/activity_main.xml" value="0.309375" />
+        <entry key="..\:/Users/jeanm/StudioProjects/Restaurantapp2.0/app/src/main/res/layout/activity_order_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/jeanm/StudioProjects/Restaurantapp2.0/app/src/main/res/layout/activity_product.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/jeanm/StudioProjects/Restaurantapp2.0/app/src/main/res/layout/activity_product_detail.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/jeanm/StudioProjects/Restaurantapp2.0/app/src/main/res/layout/activity_product_edit.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/jeanm/StudioProjects/Restaurantapp2.0/app/src/main/res/layout/activity_service.xml" value="0.35733695652173914" />
+        <entry key="..\:/Users/jeanm/StudioProjects/Restaurantapp2.0/app/src/main/res/layout/adapter_recycler_avaiable_tables.xml" value="0.309375" />
+        <entry key="..\:/Users/jeanm/StudioProjects/Restaurantapp2.0/app/src/main/res/layout/adapter_recycler_avaliable_products.xml" value="0.309375" />
+        <entry key="..\:/Users/jeanm/StudioProjects/Restaurantapp2.0/app/src/main/res/layout/adapter_recycler_invoice_products.xml" value="0.35104166666666664" />
+        <entry key="..\:/Users/jeanm/StudioProjects/Restaurantapp2.0/app/src/main/res/layout/adapter_recycler_order_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/jeanm/StudioProjects/Restaurantapp2.0/app/src/main/res/layout/adapter_recycler_order_products.xml" value="0.309375" />
+        <entry key="..\:/Users/jeanm/StudioProjects/Restaurantapp2.0/app/src/main/res/layout/adapter_recycler_orders_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/leobt/OneDrive/repos/Restaurantapp/app/src/main/res/layout/activity_main.xml" value="0.17407407407407408" />
         <entry key="..\:/Users/leobt/OneDrive/repos/Restaurantapp/app/src/main/res/layout/activity_product.xml" value="0.2" />
         <entry key="..\:/Users/leobt/OneDrive/repos/Restaurantapp/app/src/main/res/layout/activity_product_detail.xml" value="0.2" />
@@ -16,7 +29,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
