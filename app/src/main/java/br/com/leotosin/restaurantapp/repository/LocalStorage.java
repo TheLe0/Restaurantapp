@@ -138,6 +138,10 @@ public class LocalStorage implements IRepository {
         return null;
     }
 
+    public ArrayList<Order> getAllOrders(){
+        return this.orders;
+    }
+
     public Order getOrderById(String orderId) {
         for (Order order : this.orders) {
             if (order.getOrderId().equals(orderId)) {
@@ -147,6 +151,7 @@ public class LocalStorage implements IRepository {
 
         return null;
     }
+
 
     private void populateAvailableProducts() {
         this.availableProducts = new ArrayList<Product>();

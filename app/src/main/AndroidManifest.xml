@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Restaurantapp">
         <activity
+            android:name=".views.OrderListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.InvoiceOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.ProductEditActivity"
             android:exported="false" />
         <activity

@@ -22,13 +22,9 @@ public class ProductEditViewModel extends BaseViewModel {
         this.repository.updateProduct(orderId, product, qty);
     }
 
-    public void removeProduct() {
-        this.repository.deleteProduct(orderId, product);
-    }
+    public void removeProduct(){this.repository.deleteProduct(orderId, product); }
 
-    public Product getProduct() {
-        return product;
-    }
+    public Product getProduct() {return product;}
 
     public void setProduct(Product product) {
         this.product = product;

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private TableViewModel viewModel;
     private RecyclerView recyclerViewAvailableTables;
     private RecyclerViewAvailableTablesAdapter adapter;
+    private Button btnOrderList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel = new TableViewModel();
 
+        btnOrderList = this.findViewById(R.id.orderList);
         recyclerViewAvailableTables = this.findViewById(R.id.recycler_available_tables);
         adapter = new RecyclerViewAvailableTablesAdapter(viewModel.getAvailableTables());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -55,5 +58,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
         );
+
+        btnOrderList.setOnClickListener(v -> {
+            Intent intent = new Intent(getBaseContext(), OrderListActivity.class);
+            startActivity(intent);
+        });
     }
 }

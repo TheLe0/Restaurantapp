@@ -22,4 +22,5 @@ public interface IRepository {
     void updateProduct(String orderId, Product product, int qty);
     void deleteProduct(String orderId, Product product);
     void invoiceOrder(String orderId);
+    ArrayList<Order> getAllOrders();
 }

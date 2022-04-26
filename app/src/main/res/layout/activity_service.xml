@@ -18,6 +18,18 @@
             android:layout_gravity="center"
             android:layout_height="wrap_content">
 
+            <Button
+                android:id="@+id/back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/return_to_tables"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.2" />
+
             <TextView
                 android:id="@+id/tableNumber"
                 android:layout_width="match_parent"
@@ -25,7 +37,9 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
-                android:text="@string/table_title" />
+                android:text="@string/table_title"
+                android:layout_weight="1" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -80,6 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/invoice_order"/>
+
         </LinearLayout>
     </LinearLayout>
 

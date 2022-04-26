@@ -1,5 +1,6 @@
 package br.com.leotosin.restaurantapp.views;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,24 +54,15 @@ public class RecyclerViewOrdersListAdapter extends RecyclerView.Adapter<Recycler
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Order order = listOrders.get(position);
 
-        holder.getTableNumber().setText(order.getTable().getNumber());
-        holder.getOrderNumber().setText(order.getOrderId());
+        holder.getTableNumber().setText("Mesa:" + order.getTable().getNumber());
+        holder.getOrderNumber().setText("Pedido:" + order.getOrderId());
         if(order.isInvoiced()){
-            holder.getButtonInvoice().setText("Pagar");
-        } else {
             holder.getButtonInvoice().setVisibility(View.GONE);
+        } else {
+            holder.getButtonInvoice().setText("Pagar");
         }
-
-       /* holder.getButtonInvoice().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!listOrders.get(position).isInvoiced()) {
-
-                } else {
-                }
-            }
-        });*/
     }
+
     @Override
     public int getItemCount() {
         return this.listOrders.size();

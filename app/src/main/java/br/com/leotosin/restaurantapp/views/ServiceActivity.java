@@ -24,6 +24,7 @@ public class ServiceActivity extends AppCompatActivity {
     private TextView orderSubtotal;
     private Button btnInvoiceOrder;
     private RecyclerView recyclerViewOrderProducts;
+    private Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class ServiceActivity extends AppCompatActivity {
 
         String amount = new DecimalFormat("0.00").format(viewModel.orderSubtotal());
 
-        tableNumber.setText(tableNumber.getText()+" "+viewModel.getTableNumber());
+        tableNumber.setText(tableNumber.getText()+" "+ viewModel.getTableNumber());
         orderSubtotal.setText("R$ "+amount);
 
     }
@@ -50,17 +51,23 @@ public class ServiceActivity extends AppCompatActivity {
         orderSubtotal = (TextView) findViewById(R.id.order_subtotal);
         Button btnAddProduct = (Button) findViewById(R.id.addProduct);
         btnInvoiceOrder = (Button) findViewById(R.id.invoiceOrder);
+        btnBack = (Button) findViewById(R.id.back);
         enableInvoiceOrder();
 
         btnInvoiceOrder.setOnClickListener(v -> {
-            viewModel.invoiceOrder();
-            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            Intent intent = new Intent(getBaseContext(), InvoiceOrderActivity.class);
+            intent.putExtra("order_id", viewModel.getOrderId());
             startActivity(intent);
         });
 
         btnAddProduct.setOnClickListener(v -> {
             Intent intent = new Intent(getBaseContext(), ProductActivity.class);
             intent.putExtra("order_id", viewModel.getOrderId());
+            startActivity(intent);
+        });
+
+        btnBack.setOnClickListener(v ->{
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
         });
 
@@ -96,6 +103,7 @@ public class ServiceActivity extends AppCompatActivity {
 
     private void getOrderId() {
         Bundle extras = getIntent().getExtras();
+
         if (extras != null) {
             viewModel.setOrderId(extras.getString("order_id"));
         }

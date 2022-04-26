@@ -58,10 +58,9 @@ public class RecyclerViewInvoiceProductsAdapter extends RecyclerView.Adapter<Rec
 
     private String lineTotalPriceToString(int position){
         OrderLine orderLine = listOrderLines.get(position);
-        String lineTotalPrice =  orderLine.getQtyFormated() +" x "+ orderLine.getProduct().getPrice() +" = " +
-                orderLine.getQty()*orderLine.getProduct().getPrice();
 
-        return lineTotalPrice;
+        return orderLine.getQtyFormated() +" x "+ orderLine.getProduct().getPrice() +" = " +
+                orderLine.getQty()*orderLine.getProduct().getPrice();
     }
 
     @Override

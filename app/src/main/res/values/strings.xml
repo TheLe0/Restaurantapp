@@ -26,5 +26,5 @@
     <string name="total">Total R$</string>
     <string name="invoice_tip">Pagar com gorjeta</string>
     <string name="invoice_no_tip">Pagar sem gorjeta</string>
-    <string name="line_price">%1$d X %2$f = %3$f</string>
+    <string name="order_list">Listagem de pedidos</string>
 </resources>

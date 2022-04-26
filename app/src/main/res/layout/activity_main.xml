@@ -9,7 +9,15 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="wrap_content"
-        tools:context=".views.MainActivity">
+        tools:context=".views.MainActivity"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/orderList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order_list"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_available_tables"
