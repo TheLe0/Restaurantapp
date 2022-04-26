@@ -67,6 +67,11 @@ public class InvoiceOrderActivity extends AppCompatActivity {
         Double total = this.getTotal(viewModel.getOrderById().getProducts());
         orderTotal.setText("Total R$: "+ Double.toString(total));
 
+        if(viewModel.getOrderById().isInvoiced()){
+            btnPayWithTip.setVisibility(View.GONE);
+            btnPayNoTip.setVisibility(View.GONE);
+        }
+
         btnPayWithTip.setOnClickListener(v ->{
             viewModel.invoiceOrder();
             Intent intent = new Intent(getBaseContext(), OrderListActivity.class);
